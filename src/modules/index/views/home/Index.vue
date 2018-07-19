@@ -6,6 +6,7 @@
     <div style="padding:0 .15rem;">
       <custom-notice></custom-notice>
       welcome <b>{{home._LOGINUSER_.name}}</b>
+      <map-postion></map-postion>
     </div>
   </div>
 </template>
@@ -13,6 +14,7 @@
 <script>
 import { mapRules, mapModules } from 'vuet'
 import CustomNotice from '@/components/CustomNotice'
+import MapPosition from '@/components/MapPosition'
 export default {
   mixins: [
     mapModules({ home: 'home' })
@@ -28,7 +30,8 @@ export default {
     
   },
   components:{
-    CustomNotice
+    CustomNotice,
+    MapPosition
   },
   methods:{
     userName(){
