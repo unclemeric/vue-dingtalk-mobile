@@ -1,4 +1,4 @@
-import * as dd from 'dingtalk-jsapi'
+import * as DingTalkApi from 'dingtalk-jsapi'
 import Ding from '@/dings/index.js'
 import vuet from '@/vuet'
 import axios from 'axios'
@@ -6,9 +6,7 @@ import axios from 'axios'
 const { DINTALK_API, AUTH_URL } = require(`@/config/develop.json`);
 
 function cacheLoginInfo(loginuser){
-    dd.util.domainStorage.setItem({name:"loginuser",value:JSON.stringify(loginuser || {})},function(){
-        vuet.modules.home.checkLogin();//更新vuet状态的登录人信息
-    })
+    DingTalkApi.util.domainStorage.setItem({name:"loginuser",value:JSON.stringify(loginuser || {})})
 }
 
 export const checkAuth = function() {

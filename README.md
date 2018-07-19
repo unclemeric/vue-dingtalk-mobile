@@ -49,3 +49,9 @@ npm run build
 # 创建模块，自动在src/modules/下生成模板代码和入口文件
 npm run module
 ```
+##Tip
+
+```bash
+#关于dingtalk-jsapi说明
+关于index.html引用了dingtalk-api的script，在代码里面又引入dingtalk-jsapi这个库，原因是有的api在库里面没有(例如地图功能的dd.device.geolocation.stop在库里面没有)，而在script引入api里面有，所以库只用来做UI及其他方面的功能，而不是用于API调用。
+```

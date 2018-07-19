@@ -9,8 +9,8 @@
 </template>
 
 <script>
-import start from 'dingtalk-jsapi/api/device/geolocation/start';
-import stop from 'dingtalk-jsapi/api/device/geolocation/stop';
+// import * as DingTalkApi from 'dingtalk-jsapi';
+import Ding from '@/dings/index.js'
 export default {
     data(){
         return {
@@ -18,50 +18,63 @@ export default {
         }
     },
     methods:{
-        startPosition(){
+        async startPosition(){
+            let that = this;
+            await Ding.ddConfig(); 
+            // dd.biz.map.locate({
+            //     latitude: 39.903578, // 纬度，非必须
+            //     longitude: 116.473565, // 经度，非必须
+            //     onSuccess: function (result) {
+            //         /* result 结构 */
+            //         // {
+            //         //     province: 'xxx', // POI所在省会，可能为空
+            //         //     provinceCode: 'xxx', // POI所在省会编码，可能为空
+            //         //     city: 'xxx', // POI所在城市，可能为空
+            //         //     cityCode: 'xxx', // POI所在城市，可能为空
+            //         //     adName: 'xxx', // POI所在区名称，可能为空
+            //         //     adCode: 'xxx', // POI所在区编码，可能为空
+            //         //     distance: 'xxx', // POI与设备位置的距离
+            //         //     postCode: 'xxx', // POI的邮编，可能为空
+            //         //     snippet: 'xxx', // POI的街道地址，可能为空
+            //         //     title: 'xxx', // POI的名称
+            //         //     latitude: 39.903578, // POI的纬度
+            //         //     longitude: 116.473565, // POI的经度
+            //         // }
+            //     },
+            //     onFail: function (err) {
+            //         alert(JSON.stringify(err))
+            //     }
+            // });
             // ... 业务代码
-            start({
-                targetAccuracy : 10, // 期望精确度
-                iOSDistanceFilter: 2, // 变更感知精度(iOS端参数)
-                useCache: false, // 是否使用缓存(Android端参数)
-                withRegeocode : false, // 是否返回逆地理信息,默认否
-                callBackInterval : 1000, //回传时间间隔，ms
-                sceneId: "home" // 定位场景id,
-            }).then((res) => {
-                console.log(res);
-                this.result = res;
-                /* 高德坐标 result 结构
-                {
-                    longitude : Number,
-                    latitude : Number,
-                    accuracy : Number,
-                    address : String,
-                    province : String,
-                    city : String,
-                    district : String,
-                    road : String,
-                    netType : String,
-                    operatorType : String,
-                    errorMessage : String,
-                    errorCode : Number,
-                    isWifiEnabled : Boolean,
-                    isGpsEnabled : Boolean,
-                    isFromMock : Boolean,
-                    provider : wifi|lbs|gps,
-                    accuracy : Number,
-                    isMobileEnabled : Boolean
+            dd.device.geolocation.start({
+                targetAccuracy : 1, // 期望精确度
+                iOSDistanceFilter: 1, // 变更感知精度(iOS端参数)
+                withReGeocode : true, // 是否返回逆地理信息,默认否
+                callBackInterval : 300, //回传时间间隔，ms
+                sceneId: "home", // 定位场景id,
+                onSuccess : function(result) {
+                    that.result = result;
+                    /*  结果同dd.device.geolocation.get */
+                },
+                onFail : function(err) {
+                alert(JSON.stringify(err))
                 }
-                */
-            }).catch((err) => {})
+            });
         },
-        stopPosition(){
+        async stopPosition(){
             // ... 业务代码
-            stop({
+            let that = this;
+            await Ding.ddConfig(); 
+            dd.device.geolocation.stop({
                 sceneId: 'home', // 需要停止定位场景id
-            }).then((res) => {
-                console.log(res);
-                this.result = res;
-            }).catch((err) => {})
+                onSuccess : function(result) {
+                    alert(JSON.stringify(result))
+                    that.result = result;
+                },
+                onFail : function(err) {
+                    alert(JSON.stringify(err))
+                }
+            });
         }
     }
 }

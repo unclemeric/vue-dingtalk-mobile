@@ -1,13 +1,13 @@
 import router from '@/modules/index/router'
 import vuet from '@/vuet'
 import { checkAuth } from './ding'
-import * as dd from 'dingtalk-jsapi'
+import * as DingTalkApi from 'dingtalk-jsapi'
 
 
 // const white_list = ['/no-permission']
 
 const notificationMsg = function(msg,cb){
-    dd.device.notification.alert({
+    DingTalkApi.device.notification.alert({
         message: msg,
         title: "提示",//可传空
         buttonName: "确定",
@@ -20,7 +20,7 @@ const notificationMsg = function(msg,cb){
 
 router.beforeEach(async (to, from, next) => {
     // ...
-    if(!dd.other){
+    if(!DingTalkApi.other){
         let login_result = {}
         if(vuet.modules.home._LOGINUSER_.userid){
             login_result = vuet.modules.home._LOGINUSER_;

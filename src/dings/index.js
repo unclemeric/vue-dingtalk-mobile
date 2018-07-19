@@ -1,5 +1,5 @@
 
-import * as dd from 'dingtalk-jsapi'
+// import * as dd from 'dingtalk-jsapi'
 import jsapi from './jsapi.json';
 import Logger from '@/utils/logger'
 // import fetch from '@/utils/httpUtil'

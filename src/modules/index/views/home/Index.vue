@@ -6,7 +6,7 @@
     <div style="padding:0 .15rem;">
       <custom-notice></custom-notice>
       welcome <b>{{home._LOGINUSER_.name}}</b>
-      <map-postion></map-postion>
+      <map-position></map-position>
     </div>
   </div>
 </template>

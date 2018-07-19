@@ -27,6 +27,8 @@
     "biz.navigation.setMenu": true ,                        
     "biz.navigation.setRight": true ,
     "device.geolocation.get": true , 
+    "device.geolocation.start": true , 
+    "device.geolocation.stop": true , 
     "biz.map.locate": true ,                        
     "biz.map.search": true ,                        
     "biz.map.view": true ,    
