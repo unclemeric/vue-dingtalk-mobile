@@ -7,6 +7,9 @@
       <custom-notice></custom-notice>
       welcome <b>{{home._LOGINUSER_.name}}</b>
       <map-position></map-position>
+      <v-ding></v-ding>
+      <mt-button @click="QRCode">扫一扫</mt-button>
+      <input type="file" name="" ref="takePic" accept="image/*" capture="camera">
     </div>
   </div>
 </template>
@@ -15,6 +18,7 @@
 import { mapRules, mapModules } from 'vuet'
 import CustomNotice from '@/components/CustomNotice'
 import MapPosition from '@/components/MapPosition'
+import VDing from '@/components/Ding'
 export default {
   mixins: [
     mapModules({ home: 'home' })
@@ -31,13 +35,33 @@ export default {
   },
   components:{
     CustomNotice,
-    MapPosition
+    MapPosition,
+    VDing
   },
   methods:{
+    QRCode(){
+      dd.biz.util.scan({
+        type: "all" , // type 为 all、qrCode、barCode，默认是all。
+        onSuccess: function(data) {
+          console.log(data)
+          alert(JSON.stringify(data))
+        },
+        onFail : function(err) {
+        }
+      })
+    },
     userName(){
       return window._LOGINNAME || ''
     },
+    takePicIosFixed(){
+      if(dd.ios){
+        this.$refs.takePic.removeAttribute('capture');
+      }
+    }
   },
+  mounted(){
+    this.takePicIosFixed();
+  }
 }
 </script>
 

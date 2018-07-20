@@ -1,12 +1,12 @@
 import Vue from 'vue'
 import Vuet, { mapModules, mapRules } from 'vuet'
-import * as dd from 'dingtalk-jsapi'
+import * as DingTalkApi from 'dingtalk-jsapi'
 import httpUtil from '@/utils/httpUtil'
 
 Vue.use(Vuet)
 
 const user_storage = function(){
-    return dd.util.domainStorage.getItem({name:"loginuser"}).then(res=>{
+    return DingTalkApi.util.domainStorage.getItem({name:"loginuser"}).then(res=>{
         return JSON.parse(res.value||'{}');
     });
 }

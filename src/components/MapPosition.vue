@@ -14,7 +14,25 @@ import Ding from '@/dings/index.js'
 export default {
     data(){
         return {
-            result:{}
+            result:{},
+        }
+    },
+    watch:{
+        result(result){
+            if(result.resultCode == 0){
+                dd.biz.map.locate({
+                    latitude: result.latitude, // 纬度，非必须
+                    longitude: result.longitude, // 经度，非必须
+                    onSuccess: function (result) {
+                        /* result 结构 */
+                        that.result = result;
+                        that.flag = false;
+                    },
+                    onFail: function (err) {
+                        that.result = {error:'失败'}
+                    }
+                });
+            }
         }
     },
     methods:{
@@ -54,10 +72,11 @@ export default {
                 sceneId: "home", // 定位场景id,
                 onSuccess : function(result) {
                     that.result = result;
-                    /*  结果同dd.device.geolocation.get */
+                    alert(JSON.stringify(result))
+                    
                 },
                 onFail : function(err) {
-                alert(JSON.stringify(err))
+                    alert(JSON.stringify(err),'onFail')
                 }
             });
         },
