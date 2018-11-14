@@ -1,6 +1,6 @@
 { 
     "DINTALK_API": true, 
-    "corpId": "dinga04ad0aa6f805b3435c2f4657eb6378f",
+    "corpId": "xxxxxxxxxxxxxxxxxxxxxxx",
     "AUTH_URL": "http://172.30.0.125:3002/",
     "APP_URL": { "url": "http://192.168.10.11:3000/" },
     "API_URL": "http://172.30.0.125:3002/" ,
